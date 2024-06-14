@@ -80,7 +80,7 @@ jobs:
         working-directory: app
 
       - name: Copy to build folder
-        run: mkdir -p build/app && cp -R app/server build/app
+        run: mkdir -p build/app && cp -R app/server/. build/app
 
       # Run back-end processes (install, lint, test, bundle)
       - name: Cache server app node modules
@@ -99,11 +99,10 @@ jobs:
         working-directory: etl
 
       - name: Copy to build folder
-        run: mkdir -p build/etl && cp -R etl build/etl
+        run: mkdir -p build/etl && cp -R etl/. build/etl
 
       - name: Create production artifact
         uses: actions/upload-artifact@v4
         with:
           name: eq_v${{ env.APP_VERSION }}
           path: build
-          
